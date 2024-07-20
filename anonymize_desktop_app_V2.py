@@ -266,12 +266,12 @@ class DocumentViewer(QMainWindow):
         self.anonListWidget.clear()
         
         # Add "Names" section
-        names_item = QListWidgetItem("Names")
+        names_item = QListWidgetItem("Names & Surnames")
         names_item.setFont(QFont("Arial", weight=QFont.Bold))
         self.anonListWidget.addItem(names_item)
         
         for item in anon_mapping:
-            if item['anon_word'].startswith('N_'):
+            if item['anon_word'].startswith('N_') or item['anon_word'].startswith('S_'):
                 list_item = QListWidgetItem(f"{item['word']} - {item['anon_word']}")
                 list_item.setFont(QFont("Arial", italic=True))
                 self.anonListWidget.addItem(list_item)
@@ -287,6 +287,28 @@ class DocumentViewer(QMainWindow):
                 list_item.setFont(QFont("Arial", italic=True))
                 self.anonListWidget.addItem(list_item)
 
+        # Add "business" section
+        business_item = QListWidgetItem("Business")
+        business_item.setFont(QFont("Arial", weight=QFont.Bold))
+        self.anonListWidget.addItem(business_item)
+        
+        for item in anon_mapping:
+            if item['anon_word'].startswith('B_'):
+                list_item = QListWidgetItem(f"{item['word']} - {item['anon_word']}")
+                list_item.setFont(QFont("Arial", italic=True))
+                self.anonListWidget.addItem(list_item)
+
+        # Add "Case Numbers" section
+        case_numbers_item = QListWidgetItem("Case Numbers")
+        case_numbers_item.setFont(QFont("Arial", weight=QFont.Bold))
+        self.anonListWidget.addItem(case_numbers_item)
+        
+        for item in anon_mapping:
+            if item['anon_word'].startswith('C_'):
+                list_item = QListWidgetItem(f"{item['word']} - {item['anon_word']}")
+                list_item.setFont(QFont("Arial", italic=True))
+                self.anonListWidget.addItem(list_item)
+        
     def open_file(self):
         options = QFileDialog.Options()
         fileName, _ = QFileDialog.getOpenFileName(self, "Open Document", "", "Documents (*.doc *.docx *.pdf);;All Files (*)", options=options)
